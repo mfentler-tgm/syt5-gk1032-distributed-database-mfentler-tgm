@@ -8,7 +8,7 @@ def connect():
     conn = None
     try:
         # read connection parameters
-        params = config('postgresql:horizontal')
+        params = config('postgresql:vertical')
 
         # connect to the PostgreSQL server
         print('Connecting to the PostgreSQL database...')
@@ -19,7 +19,7 @@ def connect():
 
         # execute a statement
         print('PostgreSQL database version:')
-        cur.execute('SELECT * FROM horizontal.cheap_comedy;')
+        cur.execute('SELECT * FROM vertikal.simplefilm;')
 
         # display the PostgreSQL database server version
         dvds = cur.fetchall()
@@ -39,7 +39,7 @@ def ek():
     conn = None
     try:
         # read connection parameters
-        params = config('postgresql:horizontal')
+        params = config('postgresql:vertical')
 
         # connect to the PostgreSQL server
         print('Connecting to the PostgreSQL database...')
@@ -49,18 +49,18 @@ def ek():
         cur = conn.cursor()
 
         # execute a statement
-        print('Number of entries in horizontal table:')
-        cur.execute('SELECT count(*) FROM horizontal.cheap_comedy;')
+        print('Number of entries in vertical table:')
+        cur.execute('SELECT count() FROM vertikal.simplefilm LIMIT 1;')
         dvds = cur.fetchall()
         for x in dvds:
             print(x)
         print('Number of entries in the standard table:')
-        cur.execute('SELECT count(*) FROM products;')
+        cur.execute('SELECT ROW_COUNT FROM products;')
         dvds = cur.fetchall()
         for x in dvds:
             print(x)
         print('Number of entries in the standard table without the excluded values:')
-        cur.execute('SELECT count(*) FROM products WHERE prod_id NOT IN (SELECT prod_id FROM horizontal.cheap_comedy);')
+        cur.execute('SELECT ROW_COUNT FROM products WHERE prod_id NOT IN (SELECT prod_id FROM vertikal.simplefilm);')
         dvds = cur.fetchall()
         for x in dvds:
             print(x)
@@ -75,5 +75,5 @@ def ek():
             print('Database connection closed.')
 
 if __name__ == '__main__':
-    connect()
+    #connect()
     ek()
