@@ -50,7 +50,7 @@ def ek():
 
         # execute a statement
         print('Number of entries in vertical table:')
-        cur.execute('SELECT count() FROM vertikal.simplefilm LIMIT 1;')
+        cur.execute('SELECT count(*) FROM vertikal.simplefilm LIMIT 1;')
         dvds = cur.fetchall()
         for x in dvds:
             print(x)
