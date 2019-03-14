@@ -62,6 +62,12 @@ Antwort 4: Es gibt __3 Arten der Transparenz:__
 - Was versteht man unter dem Begriff Fragmentierung beim Entwurf einer verteilten Datenbank?  
 - Wie sieht eine vertikale Fragmentierung aus? Erklären Sie die Begriffe anhand von einem Beispiel.
 
+## Deployment
+Um alle Queries auszuführen, das File allSearches starten, sonst das jedweilige File (horizontalSearch, etc.)
+```bash
+python src/allSearches.py
+```
+
 ## Quellen
 [1] - [https://stackoverflow.com/questions/658395/find-the-number-of-columns-in-a-table](https://stackoverflow.com/questions/658395/find-the-number-of-columns-in-a-table)    
 [2] - [https://www.dbai.tuwien.ac.at/education/dbs/WS2010/folien/Kapitel16.pdf](https://www.dbai.tuwien.ac.at/education/dbs/WS2010/folien/Kapitel16.pdf)  
