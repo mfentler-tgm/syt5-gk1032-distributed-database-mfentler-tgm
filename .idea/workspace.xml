@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1d78d95f-1206-4764-a348-eb82c5114b85" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/verticalSearch.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/verticalSearch.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,7 +14,7 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/syt5_gk1032_distributed_database_mfentler_tgm$horizontalSearch.coverage" NAME="horizontalSearch Coverage Results" MODIFIED="1552564089981" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/syt5_gk1032_distributed_database_mfentler_tgm$allSearches.coverage" NAME="allSearches Coverage Results" MODIFIED="1552563363437" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
-    <SUITE FILE_PATH="coverage/syt5_gk1032_distributed_database_mfentler_tgm$verticalSearch.coverage" NAME="verticalSearch Coverage Results" MODIFIED="1552563476660" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/syt5_gk1032_distributed_database_mfentler_tgm$verticalSearch.coverage" NAME="verticalSearch Coverage Results" MODIFIED="1552567428598" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
   <component name="FUSProjectUsageTrigger">
     <session id="-1051769493">
@@ -46,16 +47,16 @@
         <counts>
           <entry key="dummy" value="10" />
           <entry key="ini" value="108" />
-          <entry key="md" value="1389" />
-          <entry key="py" value="1140" />
+          <entry key="md" value="2272" />
+          <entry key="py" value="1348" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Ini" value="108" />
-          <entry key="Markdown" value="1389" />
+          <entry key="Markdown" value="2272" />
           <entry key="PLAIN_TEXT" value="10" />
-          <entry key="Python" value="1140" />
+          <entry key="Python" value="1348" />
         </counts>
       </usages-collector>
     </session>
@@ -66,7 +67,7 @@
         <entry file="file://$PROJECT_DIR$/src/horizontalSearch.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1020">
-              <caret line="62" column="35" selection-start-line="62" selection-start-column="35" selection-end-line="62" selection-end-column="35" />
+              <caret line="62" column="60" selection-start-line="62" selection-start-column="60" selection-end-line="62" selection-end-column="60" />
             </state>
           </provider>
         </entry>
@@ -86,10 +87,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/verticalSearch.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="100">
-              <caret line="50" column="29" selection-start-line="50" selection-start-column="29" selection-end-line="50" selection-end-column="29" />
+            <state relative-caret-position="161">
+              <caret line="69" column="34" selection-start-line="69" selection-start-column="34" selection-end-line="69" selection-end-column="34" />
               <folding>
-                <marker date="1552563476634" expanded="true" signature="995:2271" ph="..." />
+                <element signature="e#18#33#0" expanded="true" />
+                <marker date="1552567453489" expanded="true" signature="995:2605" ph="..." />
               </folding>
             </state>
           </provider>
@@ -111,8 +113,8 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="271">
-                <caret line="40" column="106" selection-start-line="40" selection-start-column="106" selection-end-line="40" selection-end-column="106" />
+              <first_editor relative-caret-position="486">
+                <caret line="62" column="2" selection-start-line="62" selection-start-column="2" selection-end-line="62" selection-end-column="2" />
               </first_editor>
               <second_editor />
             </state>
@@ -156,8 +158,8 @@
         <option value="$PROJECT_DIR$/src/database.ini" />
         <option value="$PROJECT_DIR$/src/combinedSearch.py" />
         <option value="$PROJECT_DIR$/src/horizontalSearch.py" />
-        <option value="$PROJECT_DIR$/src/verticalSearch.py" />
         <option value="$PROJECT_DIR$/src/allSearches.py" />
+        <option value="$PROJECT_DIR$/src/verticalSearch.py" />
         <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
@@ -229,7 +231,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.horizontalSearch">
+  <component name="RunManager" selected="Python.verticalSearch">
     <configuration name="allSearches" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="syt5-gk1032-distributed-database-mfentler-tgm" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -303,8 +305,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.horizontalSearch" />
         <item itemvalue="Python.verticalSearch" />
+        <item itemvalue="Python.horizontalSearch" />
         <item itemvalue="Python.allSearches" />
       </list>
     </recent_temporary>
@@ -331,7 +333,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3286119" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3186969" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -356,13 +358,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/horizontalSearch.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1020">
-          <caret line="62" column="35" selection-start-line="62" selection-start-column="35" selection-end-line="62" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/config.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -374,16 +369,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="12" column="20" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/verticalSearch.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="50" column="29" selection-start-line="50" selection-start-column="29" selection-end-line="50" selection-end-column="29" />
-          <folding>
-            <marker date="1552563476634" expanded="true" signature="995:2271" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -407,11 +392,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/verticalSearch.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="69" column="34" selection-start-line="69" selection-start-column="34" selection-end-line="69" selection-end-column="34" />
+          <folding>
+            <element signature="e#18#33#0" expanded="true" />
+            <marker date="1552567453489" expanded="true" signature="995:2605" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/horizontalSearch.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1020">
+          <caret line="62" column="60" selection-start-line="62" selection-start-column="60" selection-end-line="62" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="271">
-            <caret line="40" column="106" selection-start-line="40" selection-start-column="106" selection-end-line="40" selection-end-column="106" />
+          <first_editor relative-caret-position="486">
+            <caret line="62" column="2" selection-start-line="62" selection-start-column="2" selection-end-line="62" selection-end-column="2" />
           </first_editor>
           <second_editor />
         </state>

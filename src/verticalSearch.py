@@ -49,18 +49,18 @@ def ek():
         cur = conn.cursor()
 
         # execute a statement
-        print('Number of entries in vertical table:')
-        cur.execute('SELECT count(*) FROM vertikal.simplefilm LIMIT 1;')
+        print('Number of columns in vertical table:')
+        cur.execute("SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_CATALOG = 'ds2' AND TABLE_SCHEMA = 'vertikal' AND TABLE_NAME = 'simplefilm';")
         dvds = cur.fetchall()
         for x in dvds:
             print(x)
-        print('Number of entries in the standard table:')
-        cur.execute('SELECT ROW_COUNT FROM products;')
+        print('Number of columns in the standard table:')
+        cur.execute("SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_CATALOG = 'ds2' AND TABLE_NAME = 'products';")
         dvds = cur.fetchall()
         for x in dvds:
             print(x)
-        print('Number of entries in the standard table without the excluded values:')
-        cur.execute('SELECT ROW_COUNT FROM products WHERE prod_id NOT IN (SELECT prod_id FROM vertikal.simplefilm);')
+        print('Number of columns in the standard table without the excluded values:')
+        cur.execute("SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_CATALOG = 'ds2' AND TABLE_NAME = 'products' AND COLUMN_NAME NOT IN (SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_CATALOG = 'ds2' AND TABLE_SCHEMA = 'vertikal' AND TABLE_NAME = 'simplefilm');")
         dvds = cur.fetchall()
         for x in dvds:
             print(x)

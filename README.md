@@ -41,5 +41,27 @@ psql -d ds2
 Um später die VM von außen zu erreichen muss bei den Netzwerkeinstellungen __"Bridged"__ eingestellt sein.
 
 ## Implementierung
+### Horizontale Fragmentierung
+### Vertikale Fragmentierung
+### Kombinierte Fragmentierung
+
+
+## Fragestellungen
+- Frage 1: _Was versteht man unter dem Begriff Allokation beim Entwurf einer verteilten Datenbank?_  
+Antwort 1: Unter der Allokation versteht man die Verteilung der Fragmente auf verschiedene Stationen (Datenbanken).
+
+- Frage 2: Beschreiben Sie die Korrektheitsanforderungen bei der Fragementierung von verteilten Datenbanken.
+
+- Frage 3: Wie geht man bei einer horizontalen DB-Fragemtierung vor? Beantworten Sie diese Frage anhand eines Beispiels.
+
+- Frage 4: _Die Transparenz von verteilten Datenbanken ist in mehrere Stufen gegliedert. Beschreiben Sie die Lokale-Schema-Transparenz._  
+Antwort 4: Es gibt __3 Arten der Transparenz:__  
+    - __Fragmentierungstransparenz:__ Dabei weiß der Benutzer nicht ob es eine Fragmentierung gibt und wo welche Daten sind. Er macht einfach eine Query und das DBMS kümmert sich um den Rest.
+    - __Allokationstransparenz:__ Der Benutzer sieht, dass es verschiedene Fragmente gibt, weiß aber nicht auf welchen Servern die sich befinden.
+    - __Lokale Schema-Transparenz:__ Der Benutzer sieht die verschiedenen Fragmente und wo diese gespeichert sind. Er weiß daher ganz genau was er wo selecten muss.
+- Was versteht man unter dem Begriff Fragmentierung beim Entwurf einer verteilten Datenbank?  
+- Wie sieht eine vertikale Fragmentierung aus? Erklären Sie die Begriffe anhand von einem Beispiel.
 
 ## Quellen
+[1] - [https://stackoverflow.com/questions/658395/find-the-number-of-columns-in-a-table](https://stackoverflow.com/questions/658395/find-the-number-of-columns-in-a-table)    
+[2] - [https://www.dbai.tuwien.ac.at/education/dbs/WS2010/folien/Kapitel16.pdf](https://www.dbai.tuwien.ac.at/education/dbs/WS2010/folien/Kapitel16.pdf)  
