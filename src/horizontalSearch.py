@@ -47,18 +47,20 @@ def ek():
         cur = conn.cursor()
 
         # execute a statement
-        print('Number of entries in horizontal table:')
+        print('Number of entries in horizontal fragment table:')
         cur.execute('SELECT count(*) FROM horizontal.cheap_comedy;')
         dvds = cur.fetchall()
         for x in dvds:
             print(x)
-        print('Number of entries in the standard table:')
-        cur.execute('SELECT count(*) FROM products;')
+        print('Number of entries in rest table:')
+        cur.execute('SELECT count(*) FROM horizontal.cheap_comedy_rest;')
         dvds = cur.fetchall()
         for x in dvds:
             print(x)
-        print('Number of entries in the standard table without the excluded values:')
-        cur.execute('SELECT count(*) FROM products WHERE prod_id NOT IN (SELECT prod_id FROM horizontal.cheap_comedy);')
+        print('Number of entries in the combined table:')
+        cur.execute('DROP TABLE IF EXISTS mergedTableHorizontal;')
+        cur.execute('CREATE TABLE mergedTableHorizontal AS (SELECT * FROM horizontal.cheap_comedy UNION SELECT * FROM horizontal.cheap_comedy_rest);')
+        cur.execute('SELECT count(*) FROM mergedTableHorizontal;')
         dvds = cur.fetchall()
         for x in dvds:
             print(x)

@@ -59,6 +59,14 @@ CREATE TABLE horizontal.cheap_comedy AS (
     WHERE category=5 
     AND price<15
 );
+
+DROP TABLE IF EXISTS horizontal.cheap_comedy_rest;
+CREATE TABLE horizontal.cheap_comedy_rest AS (
+    SELECT * FROM products
+    WHERE prod_id NOT IN (
+        SELECT prod_id from horizontal.cheap_comedy
+    )
+);
 ```
     
 ### Vertikale Fragmentierung
@@ -70,7 +78,7 @@ CREATE TABLE vertical.simplefilm AS SELECT price,prod_id,title FROM product;
 
 ### Kombinierte Fragmentierung
 ![ERD - kombinierte Fragmentierungstabelle](resources/ERD_cheapComedySimpleFilm.jpg)
-Die hybride oder kombinierte Fragmentierung ist die Kombination aus der horizontalen und vertikalen 
+Die hybride oder kombinierte Fragmentierung ist die Kombination aus der horizontalen und vertikalen Fragmentierung. Sie ist die flexiblste Fragmentationstechnik, da die Informationshergabe so minimal wie möglich gehalten wird. 
 
 ## Zugriff auf die Daten
 Um auf die Daten zuzugreifen und das Prinzip der verteilten Datenbank zu zeigen wurde ein Script erstellt. In diesem Script werden die Daten von den Fragmentierten Tabellen ausgelesen. Die __Connection Parameter (ip und datenbank)__ werden dabei aus einem Config-File ausgelesen.
@@ -122,20 +130,22 @@ Bei der EK war gefragt, dass die Anzahl der Daten vor der Fragmentierung, die An
 
 Bei der __horizontalen Fragmentierung__ wird die Anzahl an Tabellenreihen gezählt.
 ```python
-print('Number of entries in horizontal table:')
+print('Number of entries in horizontal fragment table:')
 cur.execute('SELECT count(*) FROM horizontal.cheap_comedy;')
 dvds = cur.fetchall()
 for x in dvds:
     print(x)
 
-print('Number of entries in the standard table:')
-cur.execute('SELECT count(*) FROM products;')
+print('Number of entries in rest table:')
+cur.execute('SELECT count(*) FROM horizontal.cheap_comedy_rest;')
 dvds = cur.fetchall()
 for x in dvds:
     print(x)
-
-print('Number of entries in the standard table without the excluded values:')
-cur.execute('SELECT count(*) FROM products WHERE prod_id NOT IN (SELECT prod_id FROM horizontal.cheap_comedy);')
+    
+print('Number of entries in the combined table:')
+cur.execute('DROP TABLE IF EXISTS mergedTableHorizontal;')
+cur.execute('CREATE TABLE mergedTableHorizontal AS (SELECT * FROM horizontal.cheap_comedy UNION SELECT * FROM horizontal.cheap_comedy_rest);')
+cur.execute('SELECT count(*) FROM mergedTableHorizontal;')
 dvds = cur.fetchall()
 for x in dvds:
     print(x)
@@ -170,6 +180,16 @@ __Antwort 1:__ Unter der Allokation versteht man die Verteilung der Fragmente au
 
 - __Frage 2:__ Beschreiben Sie die Korrektheitsanforderungen bei der Fragementierung von verteilten Datenbanken.  
 __Antwort 2:__
+Folgende Kriterien müssen erfüllt sein:
+    - _Rekonstruierbarkeit_:  
+    Die usprüngliche Tabelle muss mit den einzelnen Fragmenten wieder hergestellt werden können. 
+    - _Vollständigkeit_:  
+    Jedes Datum ist mindestens einem Fragment
+    zugeordnet.
+    - _Disjunktheit_:  
+    Jedes Datum ist höchstens einem Fragment
+    zugeordnet. 
+
 
 - __Frage 3:__ _Wie geht man bei einer horizontalen DB-Fragemtierung vor? Beantworten Sie diese Frage anhand eines Beispiels._  
 __Antwort 4:__ [Hier](#Horizontale-Fragmentierung)
