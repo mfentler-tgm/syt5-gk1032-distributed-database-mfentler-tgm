@@ -20,8 +20,6 @@ def connect():
         # execute a statement
         print('PostgreSQL database version:')
         cur.execute('SELECT * FROM horizontal.cheap_comedy;')
-
-        # display the PostgreSQL database server version
         dvds = cur.fetchall()
         for x in dvds:
             print(x)
