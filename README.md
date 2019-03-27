@@ -67,18 +67,29 @@ CREATE TABLE horizontal.cheap_comedy_rest AS (
         SELECT prod_id from horizontal.cheap_comedy
     )
 );
+
+CREATE TABLE mergedTableHorizontal AS (SELECT * FROM horizontal.cheap_comedy UNION SELECT * FROM horizontal.cheap_comedy_rest);
 ```
     
 ### Vertikale Fragmentierung
 ![ERD - vertikale Fragmentierungstabelle](resources/ERD_simpleFilm.jpg)  
 Bei der vertikalen Fragmentierung werden die Tabellen anhand der Spalten fragmentiert. Um eine saubere Rekonstruktion zu ermöglichen, sollte jede Fragmentierung den Primärschlüssel enthalten. Dadurch, dass nur die nötigen Spalten angezeigt werden, wird ein gewisser Grad an Privatsphäre gewährleistet. Ein Beispiel für vertikale Fragmentierung in Postgres:
 ```sql
-CREATE TABLE vertical.simplefilm AS SELECT price,prod_id,title FROM product; 
+CREATE TABLE vertikal.simplefilm AS SELECT price,prod_id,title FROM product; 
+
+DROP TABLE IF EXISTS vertikal.simplefilm_rest;
+CREATE TABLE vertikal.simplefilm_rest AS (SELECT prod_id, actor, category, special, common_prod_id FROM products);
+
+DROP TABLE IF EXISTS vertikal.simplefilm_merged;
+CREATE TABLE vertikal.simplefilm_merged AS (SELECT special,common_prod_id,actor,category,price,title FROM vertikal.simplefilm,vertikal.simplefilm_rest WHERE vertikal.simplefilm.prod_id = vertikal.simplefilm_rest.prod_id);
 ```
 
 ### Kombinierte Fragmentierung
 ![ERD - kombinierte Fragmentierungstabelle](resources/ERD_cheapComedySimpleFilm.jpg)
-Die hybride oder kombinierte Fragmentierung ist die Kombination aus der horizontalen und vertikalen Fragmentierung. Sie ist die flexiblste Fragmentationstechnik, da die Informationshergabe so minimal wie möglich gehalten wird. 
+Die hybride oder kombinierte Fragmentierung ist die Kombination aus der horizontalen und vertikalen Fragmentierung. Sie ist die flexiblste Fragmentationstechnik, da die Informationshergabe so minimal wie möglich gehalten wird.
+```sql
+
+```
 
 ## Zugriff auf die Daten
 Um auf die Daten zuzugreifen und das Prinzip der verteilten Datenbank zu zeigen wurde ein Script erstellt. In diesem Script werden die Daten von den Fragmentierten Tabellen ausgelesen. Die __Connection Parameter (ip und datenbank)__ werden dabei aus einem Config-File ausgelesen.
@@ -142,7 +153,7 @@ dvds = cur.fetchall()
 for x in dvds:
     print(x)
     
-print('Number of entries in the combined table:')
+print('Number of entries in both tables merged into one again:')
 cur.execute('DROP TABLE IF EXISTS mergedTableHorizontal;')
 cur.execute('CREATE TABLE mergedTableHorizontal AS (SELECT * FROM horizontal.cheap_comedy UNION SELECT * FROM horizontal.cheap_comedy_rest);')
 cur.execute('SELECT count(*) FROM mergedTableHorizontal;')
@@ -159,14 +170,18 @@ dvds = cur.fetchall()
 for x in dvds:
     print(x)
 
-print('Number of columns in the standard table:')
-cur.execute("SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_CATALOG = 'ds2' AND TABLE_NAME = 'products';")
+print('Number of columns in the rest table (Anzahl - 1, weil prod_id ja in beiden Tabellen vorhanden sein muss):')
+cur.execute("SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_CATALOG = 'ds2' AND TABLE_SCHEMA = 'vertikal' AND TABLE_NAME = 'simplefilm_rest';")
 dvds = cur.fetchall()
 for x in dvds:
     print(x)
 
-print('Number of columns in the standard table without the excluded values:')
-cur.execute("SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_CATALOG = 'ds2' AND TABLE_NAME = 'products' AND COLUMN_NAME NOT IN (SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_CATALOG = 'ds2' AND TABLE_SCHEMA = 'vertikal' AND TABLE_NAME = 'simplefilm');")
+print('Creating the merged table:')
+cur.execute('DROP TABLE IF EXISTS vertikal.simplefilm_merged;')
+cur.execute('CREATE TABLE vertikal.simplefilm_merged AS (SELECT vertikal.simplefilm.prod_id, special,common_prod_id,actor,category,price,title FROM vertikal.simplefilm,vertikal.simplefilm_rest WHERE vertikal.simplefilm.prod_id = vertikal.simplefilm_rest.prod_id);')
+
+print('Number of columns in the merged table:')
+cur.execute("SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_CATALOG = 'ds2' AND TABLE_SCHEMA = 'vertikal' AND TABLE_NAME = 'simplefilm_merged';")
 dvds = cur.fetchall()
 for x in dvds:
     print(x)

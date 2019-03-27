@@ -57,7 +57,8 @@ def ek():
         dvds = cur.fetchall()
         for x in dvds:
             print(x)
-        print('Number of entries in the combined table:')
+            
+        print('Number of entries in both tables merged into one again:')
         cur.execute('DROP TABLE IF EXISTS mergedTableHorizontal;')
         cur.execute('CREATE TABLE mergedTableHorizontal AS (SELECT * FROM horizontal.cheap_comedy UNION SELECT * FROM horizontal.cheap_comedy_rest);')
         cur.execute('SELECT count(*) FROM mergedTableHorizontal;')

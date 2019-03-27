@@ -54,13 +54,19 @@ def ek():
         dvds = cur.fetchall()
         for x in dvds:
             print(x)
-        print('Number of columns in the standard table:')
-        cur.execute("SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_CATALOG = 'ds2' AND TABLE_NAME = 'products';")
+
+        print('Number of columns in the rest table:')
+        cur.execute("SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_CATALOG = 'ds2' AND TABLE_SCHEMA = 'vertikal' AND TABLE_NAME = 'simplefilm_rest';")
         dvds = cur.fetchall()
         for x in dvds:
             print(x)
-        print('Number of columns in the standard table without the excluded values:')
-        cur.execute("SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_CATALOG = 'ds2' AND TABLE_NAME = 'products' AND COLUMN_NAME NOT IN (SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_CATALOG = 'ds2' AND TABLE_SCHEMA = 'vertikal' AND TABLE_NAME = 'simplefilm');")
+
+        print('Creating the merged table:')
+        cur.execute('DROP TABLE IF EXISTS vertikal.simplefilm_merged;')
+        cur.execute('CREATE TABLE vertikal.simplefilm_merged AS (SELECT vertikal.simplefilm.prod_id, special,common_prod_id,actor,category,price,title FROM vertikal.simplefilm,vertikal.simplefilm_rest WHERE vertikal.simplefilm.prod_id = vertikal.simplefilm_rest.prod_id);')
+
+        print('Number of columns in the merged table:')
+        cur.execute("SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_CATALOG = 'ds2' AND TABLE_SCHEMA = 'vertikal' AND TABLE_NAME = 'simplefilm_merged';")
         dvds = cur.fetchall()
         for x in dvds:
             print(x)
