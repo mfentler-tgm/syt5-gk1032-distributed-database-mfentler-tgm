@@ -85,13 +85,24 @@ CREATE TABLE vertikal.simplefilm_merged AS (SELECT special,common_prod_id,actor,
 ```
 
 ### Kombinierte Fragmentierung
-![ERD - kombinierte Fragmentierungstabelle](resources/ERD_cheapComedySimpleFilm.jpg)
-Die hybride oder kombinierte Fragmentierung ist die Kombination aus der horizontalen und vertikalen Fragmentierung. Sie ist die flexiblste Fragmentationstechnik, da die Informationshergabe so minimal wie möglich gehalten wird.
+![ERD - kombinierte Fragmentierungstabelle](resources/ERD_cheapComedySimpleFilm.jpg)  
+Die hybride oder kombinierte Fragmentierung ist die Kombination aus der horizontalen und vertikalen Fragmentierung. Sie ist die flexiblste Fragmentationstechnik, da die Informationshergabe so minimal wie möglich gehalten wird.  
+Bei der kombinierten Fragmentierung werden nur einzelne Zeilen und Spalten fragmentiert.
 ```sql
+DROP TABLE IF EXISTS combination.cheap_comedy_simplified;
+CREATE TABLE combination.cheap_comedy_simplified 
+    AS SELECT spalte1,spalte2, ... 
+    FROM products 
+    WHERE bla=bla;
 
+DROP TABLE IF EXISTS combination.cheap_comedy_rest;
+CREATE TABLE combination.cheap_comedy_rest 
+    AS SELECT restliche Spalten die nicht in cheap_comedy_simplified sind
+    WHERE 
 ```
 
-## Zugriff auf die Daten
+## __Zugriff auf die Daten__
+---
 Um auf die Daten zuzugreifen und das Prinzip der verteilten Datenbank zu zeigen wurde ein Script erstellt. In diesem Script werden die Daten von den Fragmentierten Tabellen ausgelesen. Die __Connection Parameter (ip und datenbank)__ werden dabei aus einem Config-File ausgelesen.
 
 ```python
@@ -136,7 +147,8 @@ Am Ende muss die Connection auch wieder geschlossen werden um sauber zu arbeiten
 cur.close()
 ```
 
-### EK
+## __EK__
+---
 Bei der EK war gefragt, dass die Anzahl der Daten vor der Fragmentierung, die Anzahl der Fragmentierten Daten und die Differenz angezeigt werden.  
 
 Bei der __horizontalen Fragmentierung__ wird die Anzahl an Tabellenreihen gezählt.
@@ -189,7 +201,8 @@ for x in dvds:
 
 Bei der __kombinierten Fragmentierung__ wird die kombinierte Anzahl gezählt. Dabei werden einmal die Spalten und einmal die Reihen gezählt.
 
-## Fragestellungen
+## __Fragestellungen__
+---
 - __Frage 1:__ _Was versteht man unter dem Begriff Allokation beim Entwurf einer verteilten Datenbank?_  
 __Antwort 1:__ Unter der Allokation versteht man die Verteilung der Fragmente auf verschiedene Stationen (Datenbanken).
 
@@ -199,24 +212,25 @@ Folgende Kriterien müssen erfüllt sein:
     - _Rekonstruierbarkeit_:  
     Die usprüngliche Tabelle muss mit den einzelnen Fragmenten wieder hergestellt werden können. 
     - _Vollständigkeit_:  
-    Jedes Datum ist mindestens einem Fragment
-    zugeordnet.
+    Alle Daten sind mindestens einem Fragment zugeordnet
     - _Disjunktheit_:  
     Jedes Datum ist höchstens einem Fragment
     zugeordnet. 
 
 
 - __Frage 3:__ _Wie geht man bei einer horizontalen DB-Fragemtierung vor? Beantworten Sie diese Frage anhand eines Beispiels._  
-__Antwort 4:__ [Hier](#Horizontale-Fragmentierung)
+__Antwort 3:__ [Hier](#Horizontale-Fragmentierung)
 
 - __Frage 4:__ _Die Transparenz von verteilten Datenbanken ist in mehrere Stufen gegliedert. Beschreiben Sie die Lokale-Schema-Transparenz._  
-Antwort 4: Es gibt __3 Arten der Transparenz:__  
+__Antwort 4:__  
+Es gibt __3 Arten der Transparenz:__  
     - __Fragmentierungstransparenz:__ Dabei weiß der Benutzer nicht ob es eine Fragmentierung gibt und wo welche Daten sind. Er macht einfach eine Query und das DBMS kümmert sich um den Rest.
     - __Allokationstransparenz:__ Der Benutzer sieht, dass es verschiedene Fragmente gibt, weiß aber nicht auf welchen Servern die sich befinden.
     - __Lokale Schema-Transparenz:__ Der Benutzer sieht die verschiedenen Fragmente und wo diese gespeichert sind. Er weiß daher ganz genau was er wo selecten muss.
 
 - __Frage 5:__ _Was versteht man unter dem Begriff Fragmentierung beim Entwurf einer verteilten Datenbank?_  
-__Antwort 5:__
+__Antwort 5:__  
+Darunter versteht man die Aufteilung von Tabellen(Relationen) in Teile.
 
 - __Frage 6:__ Wie sieht eine vertikale Fragmentierung aus? Erklären Sie die Begriffe anhand von einem Beispiel._  
 __Antwort 6:__ [Hier](#Vertikale-Fragmentierung)
