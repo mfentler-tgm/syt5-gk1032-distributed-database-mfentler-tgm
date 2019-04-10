@@ -90,10 +90,12 @@ Die hybride oder kombinierte Fragmentierung ist die Kombination aus der horizont
 Bei der kombinierten Fragmentierung werden nur einzelne Zeilen und Spalten fragmentiert.
 ```sql
 DROP TABLE IF EXISTS combination.cheap_comedy_simplified;
-CREATE TABLE combination.cheap_comedy_simplified 
-    AS SELECT spalte1,spalte2, ... 
+CREATE TABLE combination.cheap_comedy_simplified AS (
+    SELECT prod_id,title,price 
     FROM products 
-    WHERE bla=bla;
+    WHERE price<15 
+    AND category=14
+);
 
 DROP TABLE IF EXISTS combination.cheap_comedy_rest;
 CREATE TABLE combination.cheap_comedy_rest 
